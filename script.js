@@ -4,7 +4,6 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
   .then(res => res.json())
   .then(posts => {
     posts.map(post => {
-
       // fetch('https://jsonplaceholder.typicode.com/users/' + post.userId)
       //   .then(res => res.json())
       //   .then(user => {
@@ -53,7 +52,10 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
       postBody.classList.add('post-content');
       postBody.textContent = post.body;
 
-      postItem.append(postTitle, postAuthor, postBody);
+      let commentsWrapper = document.createElement('div');
+      commentsWrapper.classList.add('comments-wrapper');
+
+      postItem.append(postTitle, postAuthor, postBody, commentsWrapper);
       postsWrapper.prepend(postItem);
 
       fetch('https://jsonplaceholder.typicode.com/users/' + post.userId)
@@ -61,6 +63,20 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
         .then(user => {
           postAuthor.innerHTML = `Author: <a href="#">${user.name}</a>`;
         })
+      
+      fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
+        .then(res => res.json())
+        .then(comments => {
+          comments.map(comment => {
+            let commentItem = document.createElement('div');
+            commentItem.classList.add('comment-item');
 
+            commentItem.innerHTML = `<h3>${comment.name}</h3>
+                                     <span>Comment by: ${comment.email}</span>
+                                     <p>${comment.body}</p>`
+
+            commentsWrapper.prepend(commentItem);              
+          })
+        })
     });
   })
