@@ -1,0 +1,14 @@
+API nuoroda: https://jsonplaceholder.typicode.com
+
+1. Sukurti puslapį, kuriame bus atvaizduojami įrašai (posts). Kiekvienas įrašas turi:
+  1.1. Pavadinimą.
+  1.2. Pastraipą su įrašo (post) turiniu.
+
+
+  1.3. Autorių. Tai turi būti nuoroda. Kol kas ji gali niekur nevesti.
+
+
+2. Po kiekvienu įrašu (post) gali būti komentarų (sukurti variantus įrašui, kuris neturi komentarų, kuris turi vieną komentarą ir kuris turi daugiau nei vieną komentarą). Kiekvienas komentaras turi:
+  2.1. Komentaro pavadinimą.
+  2.2. Komentaro turinį - pastraipą.
+  2.3. Komentarą parašiusio asmens el. pašto adresą.
