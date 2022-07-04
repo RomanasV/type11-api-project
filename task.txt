@@ -23,3 +23,17 @@ API nuoroda: https://jsonplaceholder.typicode.com
   4.1. Visi vartotojo parašyti įrašai (posts). Post'ų įrašuose nereikia atvaizduoti komentarų. Kiekvienas post'as turi turėti nuorodą.
   4.2. Visi vartotojo sukurti foto albumai. Kiekvienas albumas turės:
     4.2.1. Albumo pavadinimą, kuris turi būti nuoroda. Kol kas nuoroda gali niekur nevesti.
+
+5. Pagrindiniame (index.html) puslapyje pridėti skiltį, kurioje atvaizduojamas albumų sąrašas. Kiekvienas albumas turės:
+  5.1. Pavadinimą, o paspaudus ant jo - nukreipiama į albumą (album.html).
+  5.2. Albumo autoriaus vardą.
+  5.3. Nuotrauką.
+
+6. Sukurti naują puslapį album.html ir jame atvaizduoti:
+  6.1. Albumo pavadinimą.
+  6.2. Album autoriaus vardą. Paspaudus ant vardo - nukreipiama į autoriaus puslapį.
+  6.3. Skiltis, kurioje atvaizduojamos visos albumo nuotraukos. Panaudoti library (biblioteką), kuri skirta gražiam galerijos atvaizdavimui, pvz.:
+    6.3.1. https://photoswipe.com/
+    6.3.2. https://nanogallery2.nanostudio.org/
+    6.3.3. https://sachinchoolur.github.io/lightgallery.js/
+    6.3.4. Arba bet kurią kitą.
