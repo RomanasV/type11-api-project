@@ -43,4 +43,21 @@ API nuoroda: https://jsonplaceholder.typicode.com
   7.2. Autoriaus vardą. Paspaudus ant autoriaus vardo, turėtų atidaryti autoriaus puslapį.
   7.3. Įrašo turinį.
   7.4. Įrašo komentarus. Komentarai turi būti atvaizduojami tokiu pačiu principu kaip ir pagrindiniame puslapyje.
-  7.5. Nuoroda „Kiti autoriaus įrašai", kurią paspaudus bus nukreipiama į naują puslapį. Jame bus atvaizduojami visi šio vartotojo įrašai.
+  7.5. Nuoroda „Kiti autoriaus įrašai", kurią paspaudus bus nukreipiama į naują puslapį posts.html. Jame bus atvaizduojami visi šio vartotojo įrašai.
+
+8. Sukurti vartotojų puslapį (users.html), kuriame būtų atvaizduotas vartotojų sąrašas.
+  8.1. Prie vartotojo turėtu būti jo vardas ir parašytų post'ų skaičius.
+  8.2. Paspaudus ant vartotojo - nukreipiama į jo puslapį.
+
+9. Tokiu pačiu principu, kaip ir vartotojų puslapį, sukurti puslapį albumams (albums.html).
+  9.1. Prie kiekvieno albumo turi būti:
+    9.1.1. Parašytas jo pavadinimas.
+    9.1.2. Parašytas vartotojo, sukūrusio šį albumą, vardas.
+    9.1.3. Albume esančių nuotraukų skaičius.
+    9.1.4. Viena nuotrauka
+
+10. Sukurti navigacijos elementą, kuris nukreips į puslapius:
+  10.1. Home / pagrindinis puslapis.
+  10.2. Users / vartotojų puslapis.
+  10.3. Albums / albumų puslapis.
+  10.4. Posts / pranešimų puslapis.
