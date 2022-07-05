@@ -1,4 +1,10 @@
-fetch('https://jsonplaceholder.typicode.com/users/1')
+let queryParams = document.location.search;
+let urlParams = new URLSearchParams(queryParams);
+let userId = urlParams.get('user_id');
+
+console.log(userId);
+
+fetch('https://jsonplaceholder.typicode.com/users/' + userId)
   .then(res => res.json())
   .then(user => {
     let userInfo = document.querySelector('#user-info');
@@ -13,7 +19,7 @@ fetch('https://jsonplaceholder.typicode.com/users/1')
                           </ul>`
   })
 
-fetch(`https://jsonplaceholder.typicode.com/users/1/posts`)
+fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
   .then(res => res.json())
   .then(posts => {
     let postsWrapper = document.querySelector('#posts-wrapper');
@@ -30,13 +36,13 @@ fetch(`https://jsonplaceholder.typicode.com/users/1/posts`)
 
       postItem.innerHTML = `<h4>${post.title}</h4>
                             <p>${post.body}</p>
-                            <a href="./post.html">Read More</a>`;
+                            <a href="./post.html?post_id=${post.id}">Read More</a>`;
 
       postsWrapper.append(postItem);
     })
   })
 
-fetch(`https://jsonplaceholder.typicode.com/users/1/albums`)
+fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
   .then(res => res.json())
   .then(albums => {
     let userAlbums = document.querySelector('#user-albums');

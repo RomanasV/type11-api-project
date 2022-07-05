@@ -62,7 +62,7 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
       fetch('https://jsonplaceholder.typicode.com/users/' + post.userId)
         .then(res => res.json())
         .then(user => {
-          postAuthor.innerHTML = `Author: <a href="#">${user.name}</a>`;
+          postAuthor.innerHTML = `Author: <a href="./user.html?user_id=${user.id}">${user.name}</a>`;
         })
       
       fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
