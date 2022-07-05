@@ -37,3 +37,10 @@ API nuoroda: https://jsonplaceholder.typicode.com
     6.3.2. https://nanogallery2.nanostudio.org/
     6.3.3. https://sachinchoolur.github.io/lightgallery.js/
     6.3.4. Arba bet kurią kitą.
+
+7. Sukurti naują puslapį post.html ir jame atvaizduoti:
+  7.1. Įrašo (post) pavadinimą.
+  7.2. Autoriaus vardą. Paspaudus ant autoriaus vardo, turėtų atidaryti autoriaus puslapį.
+  7.3. Įrašo turinį.
+  7.4. Įrašo komentarus. Komentarai turi būti atvaizduojami tokiu pačiu principu kaip ir pagrindiniame puslapyje.
+  7.5. Nuoroda „Kiti autoriaus įrašai", kurią paspaudus bus nukreipiama į naują puslapį. Jame bus atvaizduojami visi šio vartotojo įrašai.
