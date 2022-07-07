@@ -27,25 +27,31 @@ fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`)
   .then(photos => {
     let albumWrapper = document.querySelector('#album-wrapper');
 
-    let albumTitleElement = document.createElement('h1');
-    albumTitleElement.classList.add('album-title');
-    albumTitleElement.textContent = albumTitle;
+    if (photos.length > 0) {
+      let albumTitleElement = document.createElement('h1');
+      albumTitleElement.classList.add('album-title');
+      albumTitleElement.textContent = albumTitle;
 
-    let albumAuthorElement = document.createElement('span');
-    albumAuthorElement.classList.add('album-author');
-    albumAuthorElement.innerHTML = `<strong>Album author:</strong> <a href="./user.html?user_id=${userId}">${userName}</a>`;
+      let albumAuthorElement = document.createElement('span');
+      albumAuthorElement.classList.add('album-author');
+      albumAuthorElement.innerHTML = `<strong>Album author:</strong> <a href="./user.html?user_id=${userId}">${userName}</a>`;
 
-    let albumPhotos = document.createElement('div');
-    albumPhotos.classList.add('album-photos');
+      let albumPhotos = document.createElement('div');
+      albumPhotos.classList.add('album-photos');
 
-    albumWrapper.append(albumTitleElement, albumAuthorElement, albumPhotos);
+      albumWrapper.append(albumTitleElement, albumAuthorElement, albumPhotos);
 
-    photos.map(photo => {
-      let imageElement = document.createElement('img');
-      imageElement.src = photo.thumbnailUrl;
-      imageElement.classList.add('album-image');
-      imageElement.setAttribute('alt', photo.title);
+      photos.map(photo => {
+        let imageElement = document.createElement('img');
+        imageElement.src = photo.thumbnailUrl;
+        imageElement.classList.add('album-image');
+        imageElement.setAttribute('alt', photo.title);
 
-      albumPhotos.prepend(imageElement);
-    })
+        albumPhotos.prepend(imageElement);
+      })
+    } else {
+      albumWrapper.innerHTML = `<h1>No albums :(</h1>
+                                <p>Try <a href="./albums.html">here</a></p>`;
+    }
+
   })
