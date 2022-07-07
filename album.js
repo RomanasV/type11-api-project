@@ -53,5 +53,4 @@ fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`)
       albumWrapper.innerHTML = `<h1>No albums :(</h1>
                                 <p>Try <a href="./albums.html">here</a></p>`;
     }
-
   })
