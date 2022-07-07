@@ -72,3 +72,7 @@ API nuoroda: https://jsonplaceholder.typicode.com
 14.3. Jeigu neranda pagal username arba pagal tikslu vartotojo pilna vardą, tada pagal tikslų vartotojo el. paštą.
 14.4. Tikslų post'o pavadinimą.
 14.5. Tikslų albumo pavadinimą.
+
+Papildoma: 
+15. Search puslapyje turi būti paieškos forma, kuri veikia neperkraunant puslapio.
+16. Sukurti filtravimo galimybę iš dalies frazės, o nebūtinai pagal tikslią frazę.
