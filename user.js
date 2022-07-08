@@ -2,8 +2,6 @@ let queryParams = document.location.search;
 let urlParams = new URLSearchParams(queryParams);
 let userId = urlParams.get('user_id');
 
-console.log(userId);
-
 fetch('https://jsonplaceholder.typicode.com/users/' + userId)
   .then(res => res.json())
   .then(user => {
