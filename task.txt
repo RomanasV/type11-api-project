@@ -62,17 +62,18 @@ API nuoroda: https://jsonplaceholder.typicode.com
   10.3. Albums / albumų puslapis.
   10.4. Posts / pranešimų puslapis.
 
-11. Navigacijos elemente sukurti paieškos laukelį (formą ir text input).
-12. Formos submit metu, nukreipti į naują puslapį (search.html).
-13. Šiame puslapyje atvaizduoti paieškos rezultatą.
-13.1. Jeigu nėra tinkamų rezultatų, tai parašyti, jog rezultatų pagal užklausą nerasta.
-14. Filtruoti pagal:
-14.1. Tikslų vartotojo username.
-14.2. Jeigu neranda pagal username, tada pagal tikslų vartotojo pilną vardą.
-14.3. Jeigu neranda pagal username arba pagal tikslu vartotojo pilna vardą, tada pagal tikslų vartotojo el. paštą.
-14.4. Tikslų post'o pavadinimą.
-14.5. Tikslų albumo pavadinimą.
+11. Sukurti paieškos funkcionalumą navigacijos elemente:
+11.1. Navigacijos elemente sukurti formą, kuri turi text tipo input elementą (nepamiršti pridėti name atributą).
+11.2. Formos submit metu, naudojant action atributą, nukreipti į naują puslapį (search.html).
+11.3. Šiame puslapyje atvaizduoti paieškos rezultatą.
+11.3.1. Jeigu nėra tinkamų rezultatų, tai parašyti jog rezultatų pagal užklausą nerasta.
+11.4. Filtruoti pagal:
+11.4.1. Tikslų vartotojo username.
+11.4.2. Jeigu neranda pagal username, tada pagal tikslų vartotojo pilną vardą.
+11.4.3. Jeigu neranda pagal username arba pagal tikslu vartotojo pilna vardą, tada pagal tikslų vartotojo el. paštą.
+11.4.4. Tikslų post'o pavadinimą.
+11.4.5. Tikslų albumo pavadinimą.
 
 Papildoma: 
-15. Search puslapyje turi būti paieškos forma, kuri veikia neperkraunant puslapio.
-16. Sukurti filtravimo galimybę iš dalies frazės, o nebūtinai pagal tikslią frazę.
+11.5. Search puslapyje turi būti paieškos forma, kuri veikia neperkraunant puslapio.
+11.6. Sukurti filtravimo galimybę iš dalies frazės, o ne tik pagal tikslią frazę.
