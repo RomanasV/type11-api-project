@@ -22,6 +22,8 @@ let pathname = document.location.pathname;
 let header = document.createElement('header');
 let nav = document.createElement('nav');
 let searchForm = document.createElement('form');
+searchForm.setAttribute('action', './search.html');
+
 let navList = document.createElement('ul');
 
 navigationItems.map(navItem => {
