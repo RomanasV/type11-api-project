@@ -21,8 +21,7 @@ let pathname = document.location.pathname;
 
 let header = document.createElement('header');
 let nav = document.createElement('nav');
-let searchForm = document.createElement('form');
-searchForm.setAttribute('action', './search.html');
+
 
 let navList = document.createElement('ul');
 
@@ -40,16 +39,25 @@ navigationItems.map(navItem => {
   navList.append(navItemElement);
 })
 
-let searchInput = document.createElement('input');
-searchInput.setAttribute('type', 'text');
-searchInput.setAttribute('name', 'search-input');
-
-let searchSubmit = document.createElement('input');
-searchSubmit.setAttribute('type', 'submit');
-searchSubmit.value = 'Search';
-
 nav.append(navList);
-searchForm.append(searchInput, searchSubmit);
 
-header.append(nav, searchForm);
+header.append(nav);
+
+if (!pathname.includes('search.html')) {
+  let searchForm = document.createElement('form');
+  searchForm.setAttribute('action', './search.html');
+
+  let searchInput = document.createElement('input');
+  searchInput.setAttribute('type', 'text');
+  searchInput.setAttribute('name', 'search-input');
+
+  let searchSubmit = document.createElement('input');
+  searchSubmit.setAttribute('type', 'submit');
+  searchSubmit.value = 'Search';
+
+  searchForm.append(searchInput, searchSubmit);
+
+  header.append(searchForm);
+}
+
 document.body.prepend(header);
