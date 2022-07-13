@@ -23,64 +23,12 @@ function outerSearchForm() {
   let urlParams = new URLSearchParams(queryParams);
   let searchPhrase = urlParams.get('search-input');
 
-  fetch(`https://jsonplaceholder.typicode.com/users?username=${searchPhrase}`)
-    .then(res => res.json())
-    .then(users => {
-      if (users.length > 0) {
-  
-  
-        usersListTitle.textContent = 'Users:'
-        users.map(user => {
-          renderListElement({
-            content: user.name,
-            href: `./user.html?user_id=${user.id}`,
-            parentElement: usersList,
-          })
-        })
-  
-  
-      } else {
-        fetch(`https://jsonplaceholder.typicode.com/users?name=${searchPhrase}`)
-          .then(res => res.json())
-          .then(usersByName => {
-            if (usersByName.length > 0) {
-  
-  
-              usersListTitle.textContent = 'Users:'
-              usersByName.map(user => {
-                renderListElement({
-                  content: user.name,
-                  href: `./user.html?user_id=${user.id}`,
-                  parentElement: usersList,
-                })
-              })
-  
-  
-            } else {
-              fetch(`https://jsonplaceholder.typicode.com/users?email=${searchPhrase}`)
-                .then(res => res.json())
-                .then(usersByEmail => {
-                  if (usersByEmail.length > 0) {
-  
-  
-                    usersListTitle.textContent = 'Users:'
-                    usersByEmail.map(user => {
-                      renderListElement({
-                        content: user.name,
-                        href: `./user.html?user_id=${user.id}`,
-                        parentElement: usersList,
-                      })
-                    })
-  
-  
-                  } else {
-                    usersListTitle.textContent = 'Users not found.'
-                  }
-                })
-            } 
-          })
-      }
-    })
+  // renderAllUsers(`=${searchPhrase}`);
+  // renderAllPosts(`title=${searchPhrase}`);
+  // renderAllAlbums(`title=${searchPhrase}`);
+
+  let usersUrl = `=${searchPhrase}`;
+  renderAllUsers(usersUrl);
   
   let postsUrl = `title=${searchPhrase}`;
   renderAllPosts(postsUrl);
@@ -94,85 +42,11 @@ function innerSearchForm() {
   
   searchPageForm.addEventListener('submit', (event) => {
     event.preventDefault();
-  
-    usersList.innerHTML = '';
-    postsList.innerHTML = '';
-    albumsList.innerHTML = '';
-  
+    
     let searchInput = event.target.elements['search-input'].value;
-  
-    fetch(`https://jsonplaceholder.typicode.com/users?username_like=${searchInput}`)
-      .then(res => res.json())
-      .then(users => {
-        if (users.length > 0) {
-  
-  
-          usersListTitle.textContent = 'Users:'
-          users.map(user => {
-            // let userItem = document.createElement('li');
-            // userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-            // usersList.append(userItem);
-  
-            // renderListElement({
-            //   content: user.name,
-            //   href: `./user.html?user_id=${user.id}`,
-            //   parentElement: usersList,
-            // });
-            
-            let userData = {
-              content: user.name,
-              href: `./user.html?user_id=${user.id}`,
-              parentElement: usersList,
-            }
-  
-            renderListElement(userData);
-          })
-        } else {
-          fetch(`https://jsonplaceholder.typicode.com/users?name_like=${searchInput}`)
-            .then(res => res.json())
-            .then(usersByName => {
-              if (usersByName.length > 0) {
-  
-  
-                usersListTitle.textContent = 'Users:'
-                usersByName.map(user => {
-                  let userData = {
-                    content: user.name,
-                    href: `./user.html?user_id=${user.id}`,
-                    parentElement: usersList,
-                  }
-        
-                  renderListElement(userData);
-                })
-  
-  
-              } else {
-                fetch(`https://jsonplaceholder.typicode.com/users?email_like=${searchInput}`)
-                  .then(res => res.json())
-                  .then(usersByEmail => {
-                    if (usersByEmail.length > 0) {
-  
-  
-                      usersListTitle.textContent = 'Users:'
-                      usersByEmail.map(user => {
-                        let userData = {
-                          content: user.name,
-                          href: `./user.html?user_id=${user.id}`,
-                          parentElement: usersList,
-                        }
-              
-                        renderListElement(userData);
-                      })
-  
-  
-                    } else {
-                      usersListTitle.textContent = 'Users not found.'
-                    }
-                  })
-              } 
-            })
-        }
-      })
+    
+    let usersUrl = `_like=${searchInput}`;
+    renderAllUsers(usersUrl);
 
     let postsUrl = `title_like=${searchInput}`;
     renderAllPosts(postsUrl);
@@ -182,11 +56,60 @@ function innerSearchForm() {
   })
 }
 
-function renderAllUsers() {
+function renderAllUsers(searchText) {
+  usersList.innerHTML = '';
 
+  fetch(`https://jsonplaceholder.typicode.com/users?username${searchText}`)
+    .then(res => res.json())
+    .then(users => {
+      if (users.length > 0) {
+        usersListTitle.textContent = 'Users:'
+        users.map(user => {
+          renderListElement({
+            content: user.name,
+            href: `./user.html?user_id=${user.id}`,
+            parentElement: usersList,
+          })
+        })
+      } else {
+        fetch(`https://jsonplaceholder.typicode.com/users?name${searchText}`)
+          .then(res => res.json())
+          .then(usersByName => {
+            if (usersByName.length > 0) {
+              usersListTitle.textContent = 'Users:'
+              usersByName.map(user => {
+                renderListElement({
+                  content: user.name,
+                  href: `./user.html?user_id=${user.id}`,
+                  parentElement: usersList,
+                })
+              })
+            } else {
+              fetch(`https://jsonplaceholder.typicode.com/users?email${searchText}`)
+                .then(res => res.json())
+                .then(usersByEmail => {
+                  if (usersByEmail.length > 0) {
+                    usersListTitle.textContent = 'Users:'
+                    usersByEmail.map(user => {
+                      renderListElement({
+                        content: user.name,
+                        href: `./user.html?user_id=${user.id}`,
+                        parentElement: usersList,
+                      })
+                    })
+                  } else {
+                    usersListTitle.textContent = 'Users not found.';
+                  }
+                })
+            } 
+          })
+      }
+    })
 }
 
 function renderAllPosts(searchText) {
+  postsList.innerHTML = '';
+
   fetch(`https://jsonplaceholder.typicode.com/posts?${searchText}`)
     .then(res => res.json())
     .then(posts => {
@@ -207,6 +130,8 @@ function renderAllPosts(searchText) {
 }
 
 function renderAllAlbums(searchText) {
+  albumsList.innerHTML = '';
+
   fetch(`https://jsonplaceholder.typicode.com/albums?${searchText}`)
     .then(res => res.json())
     .then(albums => {
@@ -236,3 +161,82 @@ function renderListElement(data) {
 }
 
 init();
+
+
+// function test(num) {
+//   if (num < 0) {
+//     console.log('blogas skaicius');
+//   } else {
+
+//     if (num < 18) {
+//       console.log('negalima pirkti');
+//     } else {
+      
+//       console.log('pirkti gali');
+
+//       if (num > 120) {
+//         console.log('amzius per didelis')
+//       } else {
+//         console.log('netinkami duomenys')
+//       }
+//     }
+//   }
+// }
+
+// function test(num) {
+//   if (num < 0) {
+//     console.log('blogas skaicius');
+//     return;
+//   } 
+  
+//   if (num < 18) {
+//     console.log('negalima pirkti');
+//     return;
+//   }
+
+//   if (num < 120) {
+//     console.log('Pirkti galima');
+//     return;
+//   }
+
+//   // if (num >= 120) {
+//   //   console.log('skaicius per didelis');
+//   // } else {
+//   //   console.log('ERROR');
+//   // }
+
+//   if (num >= 120) {
+//     console.log('skaicius per didelis');
+//     return;
+//   } 
+
+//   console.log('ERROR');
+// }
+
+function test(num) {
+  if (num < 0) {
+    return 'blogas skaicius';
+  } 
+  
+  if (num < 18) {
+    return 'negalima pirkti';
+  }
+
+  if (num < 120) {
+    return 'Pirkti galima';
+  }
+
+  // if (num >= 120) {
+  //   console.log('skaicius per didelis');
+  // } else {
+  //   console.log('ERROR');
+  // }
+
+  if (num >= 120) {
+    return 'skaicius per didelis';
+  } 
+
+  return 'ERROR';
+}
+
+console.log(test(-5));
