@@ -213,30 +213,30 @@ init();
 //   console.log('ERROR');
 // }
 
-function test(num) {
-  if (num < 0) {
-    return 'blogas skaicius';
-  } 
+// function test(num) {
+//   if (num < 0) {
+//     return 'blogas skaicius';
+//   } 
   
-  if (num < 18) {
-    return 'negalima pirkti';
-  }
+//   if (num < 18) {
+//     return 'negalima pirkti';
+//   }
 
-  if (num < 120) {
-    return 'Pirkti galima';
-  }
+//   if (num < 120) {
+//     return 'Pirkti galima';
+//   }
 
-  // if (num >= 120) {
-  //   console.log('skaicius per didelis');
-  // } else {
-  //   console.log('ERROR');
-  // }
+//   // if (num >= 120) {
+//   //   console.log('skaicius per didelis');
+//   // } else {
+//   //   console.log('ERROR');
+//   // }
 
-  if (num >= 120) {
-    return 'skaicius per didelis';
-  } 
+//   if (num >= 120) {
+//     return 'skaicius per didelis';
+//   } 
 
-  return 'ERROR';
-}
+//   return 'ERROR';
+// }
 
-console.log(test(-5));
+// console.log(test(-5));
