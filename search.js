@@ -31,10 +31,11 @@ function outerSearchForm() {
   
         usersListTitle.textContent = 'Users:'
         users.map(user => {
-          let userItem = document.createElement('li');
-          userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-  
-          usersList.append(userItem);
+          renderListElement({
+            content: user.name,
+            href: `./user.html?user_id=${user.id}`,
+            parentElement: usersList,
+          })
         })
   
   
@@ -47,9 +48,11 @@ function outerSearchForm() {
   
               usersListTitle.textContent = 'Users:'
               usersByName.map(user => {
-                let userItem = document.createElement('li');
-                userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-                usersList.append(userItem);
+                renderListElement({
+                  content: user.name,
+                  href: `./user.html?user_id=${user.id}`,
+                  parentElement: usersList,
+                })
               })
   
   
@@ -62,9 +65,11 @@ function outerSearchForm() {
   
                     usersListTitle.textContent = 'Users:'
                     usersByEmail.map(user => {
-                      let userItem = document.createElement('li');
-                      userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-                      usersList.append(userItem);
+                      renderListElement({
+                        content: user.name,
+                        href: `./user.html?user_id=${user.id}`,
+                        parentElement: usersList,
+                      })
                     })
   
   
@@ -104,11 +109,23 @@ function innerSearchForm() {
   
           usersListTitle.textContent = 'Users:'
           users.map(user => {
-            let userItem = document.createElement('li');
-            userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-            usersList.append(userItem);
+            // let userItem = document.createElement('li');
+            // userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
+            // usersList.append(userItem);
   
+            // renderListElement({
+            //   content: user.name,
+            //   href: `./user.html?user_id=${user.id}`,
+            //   parentElement: usersList,
+            // });
+            
+            let userData = {
+              content: user.name,
+              href: `./user.html?user_id=${user.id}`,
+              parentElement: usersList,
+            }
   
+            renderListElement(userData);
           })
         } else {
           fetch(`https://jsonplaceholder.typicode.com/users?name_like=${searchInput}`)
@@ -119,9 +136,13 @@ function innerSearchForm() {
   
                 usersListTitle.textContent = 'Users:'
                 usersByName.map(user => {
-                  let userItem = document.createElement('li');
-                  userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-                  usersList.append(userItem);
+                  let userData = {
+                    content: user.name,
+                    href: `./user.html?user_id=${user.id}`,
+                    parentElement: usersList,
+                  }
+        
+                  renderListElement(userData);
                 })
   
   
@@ -134,9 +155,13 @@ function innerSearchForm() {
   
                       usersListTitle.textContent = 'Users:'
                       usersByEmail.map(user => {
-                        let userItem = document.createElement('li');
-                        userItem.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name}</a>`;
-                        usersList.append(userItem);
+                        let userData = {
+                          content: user.name,
+                          href: `./user.html?user_id=${user.id}`,
+                          parentElement: usersList,
+                        }
+              
+                        renderListElement(userData);
                       })
   
   
@@ -157,21 +182,24 @@ function innerSearchForm() {
   })
 }
 
+function renderAllUsers() {
+
+}
+
 function renderAllPosts(searchText) {
   fetch(`https://jsonplaceholder.typicode.com/posts?${searchText}`)
     .then(res => res.json())
     .then(posts => {
       if (posts.length > 0) {
-  
-  
         postsListTitle.textContent = 'Posts:';
         posts.map(post => {
-          let postItem = document.createElement('li');
-          postItem.innerHTML = `<a href="./post.html?post_id=${post.id}">${post.title}</a>`;
-          postsList.append(postItem);
+          let postData = {
+            content: post.title,
+            href: `./post.html?post_id=${post.id}`,
+            parentElement: postsList,
+          }
+          renderListElement(postData);
         })
-  
-  
       } else {
         postsListTitle.textContent = 'Posts not found.';
       }
@@ -182,21 +210,29 @@ function renderAllAlbums(searchText) {
   fetch(`https://jsonplaceholder.typicode.com/albums?${searchText}`)
     .then(res => res.json())
     .then(albums => {
+      albumsListTitle.textContent = 'Albums:';
       if (albums.length > 0) {
-        renderListElement(albums);
+
+        albums.map(album => {
+          let albumData = {
+            content: album.title,
+            href: `./album.html?album_id=${album.id}`,
+            parentElement: albumsList
+          };
+          renderListElement(albumData);
+        })
+
       } else {
         albumsListTitle.textContent = 'Albums not found.';
       }
     })
 }
 
-function renderListElement(list) {
-  albumsListTitle.textContent = 'Albums:';
-  list.map(album => {
-    let albumItem = document.createElement('li');
-    albumItem.innerHTML = `<a href="./album.html?album_id=${album.id}">${album.title}</a>`;
-    albumsList.append(albumItem);
-  })
+function renderListElement(data) {
+  let itemElement = document.createElement('li');
+  itemElement.classList.add('search-item');
+  itemElement.innerHTML = `<a href="${data.href}">${data.content}</a>`;
+  data.parentElement.append(itemElement);
 }
 
 init();
