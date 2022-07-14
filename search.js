@@ -69,6 +69,7 @@ function renderAllUsers(searchText) {
             content: user.name,
             href: `./user.html?user_id=${user.id}`,
             parentElement: usersList,
+            class: 'search-item',
           })
         })
       } else {
@@ -82,6 +83,7 @@ function renderAllUsers(searchText) {
                   content: user.name,
                   href: `./user.html?user_id=${user.id}`,
                   parentElement: usersList,
+                  class: 'search-item',
                 })
               })
             } else {
@@ -95,6 +97,7 @@ function renderAllUsers(searchText) {
                         content: user.name,
                         href: `./user.html?user_id=${user.id}`,
                         parentElement: usersList,
+                        class: 'search-item',
                       })
                     })
                   } else {
@@ -120,6 +123,7 @@ function renderAllPosts(searchText) {
             content: post.title,
             href: `./post.html?post_id=${post.id}`,
             parentElement: postsList,
+            class: 'search-item',
           }
           renderListElement(postData);
         })
@@ -142,7 +146,8 @@ function renderAllAlbums(searchText) {
           let albumData = {
             content: album.title,
             href: `./album.html?album_id=${album.id}`,
-            parentElement: albumsList
+            parentElement: albumsList,
+            class: 'search-item',
           };
           renderListElement(albumData);
         })

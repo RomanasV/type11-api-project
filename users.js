@@ -9,9 +9,12 @@ function usersPageInit() {
       usersWrapper.append(usersList);
 
       users.map(user => {
-        let userElement = document.createElement('li');
-        userElement.innerHTML = `<a href="./user.html?user_id=${user.id}">${user.name} (${user.posts.length} posts)</a>`;
-        usersList.prepend(userElement);
+        renderListElement({
+          content: `${user.name} (${user.posts.length} posts)`,
+          href: `./user.html?user_id=${user.id}`,
+          parentElement: usersList,
+          class: 'user-item',
+        });
       })
     })
 }
