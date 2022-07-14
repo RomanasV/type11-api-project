@@ -1,64 +1,90 @@
-let queryParams = document.location.search;
-let urlParams = new URLSearchParams(queryParams);
-let userId = urlParams.get('user_id');
-
-console.log(userId);
-
 let albumsWrapper = document.querySelector('#albums-wrapper');
 let albumsWrapperTitle = document.createElement('h2');
 document.body.prepend(albumsWrapperTitle);
 
-if (userId) {
-  fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
+function init() {
+  let queryParams = document.location.search;
+  let urlParams = new URLSearchParams(queryParams);
+  let userId = urlParams.get('user_id');
+
+  if (userId) {
+    renderAlbumsByUserId(userId);
+  } else {
+    renderAllAlbums();
+  }
+}
+
+function renderAlbumsByUserId(id) {
+  fetch(`https://jsonplaceholder.typicode.com/users/${id}/albums?_embed=photos&_expand=user`)
     .then(res => res.json())
     .then(albums => {
-      albums.map(album => {
-        let albumItem = document.createElement('div');
-        albumItem.classList.add('album-item');
+      albums.map(singleAlbum => {
+        // let albumItem = document.createElement('div');
+        // albumItem.classList.add('album-item');
+        
+        // albumsWrapperTitle.textContent = `Albums of ${album.user.name}:`;
+            
+        // let randomIndex = Math.floor(Math.random() * album.photos.length);
 
-        fetch('https://jsonplaceholder.typicode.com/users/' + album.userId)
-          .then(res => res.json())
-          .then(user => {
-            albumsWrapperTitle.textContent = `Albums of ${user.name}:`;
+        // albumItem.innerHTML = `<h3><a href="./album.html?album_id=${album.id}&album_title=${album.title}&user_id=${album.userId}&user_name=${album.user.name}">${album.title}</a> (${album.photos.length})</h3>
+        // <img src="${album.photos[randomIndex].thumbnailUrl}">`;
 
-            fetch(`https://jsonplaceholder.typicode.com/albums/${album.id}/photos`)
-              .then(res => res.json())
-              .then(photos => {
-                let randomIndex = Math.floor(Math.random() * photos.length);
+        // albumsWrapper.prepend(albumItem);
 
-                albumItem.innerHTML = `<h3><a href="./album.html?album_id=${album.id}&album_title=${album.title}&user_id=${album.userId}&user_name=${user.name}">${album.title}</a> (${photos.length})</h3>
-                <img src="${photos[randomIndex].thumbnailUrl}">`;
-              })
-          })
+        let albumData = {
+          album: singleAlbum,
+          title: `Albums of ${singleAlbum.user.name}:`,
+          createdBy: '',
+        }
 
-          albumsWrapper.prepend(albumItem);
-      })
-    })
-} else {
-  fetch('https://jsonplaceholder.typicode.com/albums?_limit=15')
-    .then(res => res.json())
-    .then(albums => {
-      albumsWrapperTitle.textContent = 'All albums:';
-      albums.map(album => {
-        let albumItem = document.createElement('div');
-        albumItem.classList.add('album-item');
-
-        fetch('https://jsonplaceholder.typicode.com/users/' + album.userId)
-          .then(res => res.json())
-          .then(user => {
-
-            fetch(`https://jsonplaceholder.typicode.com/albums/${album.id}/photos`)
-              .then(res => res.json())
-              .then(photos => {
-                let randomIndex = Math.floor(Math.random() * photos.length);
-
-                albumItem.innerHTML = `<h3><a href="./album.html?album_id=${album.id}&album_title=${album.title}&user_id=${album.userId}&user_name=${user.name}">${album.title}</a> (${photos.length})</h3>
-                                      <div>Album created by: <a href="./user.html?user_id=${user.id}">${user.name}</a></div>
-                                      <img src="${photos[randomIndex].thumbnailUrl}">`;
-              })
-          })
-
-          albumsWrapper.prepend(albumItem);
+        renderSingleAlbum(albumData);
       })
     })
 }
+
+function renderAllAlbums() {
+  fetch('https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=15')
+    .then(res => res.json())
+    .then(albums => {
+      console.log(albums);
+      albums.map(singleAlbum => {
+
+        // let albumData = {
+        //   album: singleAlbum,
+        //   title: 'All albums:',
+        //   createdBy: `<div>Album created by: <a href="./user.html?user_id=${singleAlbum.user.id}">${singleAlbum.user.name}</a></div>`,
+        // }
+
+        // renderSingleAlbum(albumData);
+
+        renderSingleAlbum({
+          album: singleAlbum,
+          title: 'All albums:',
+          createdBy: `<div>Album created by: <a href="./user.html?user_id=${singleAlbum.user.id}">${singleAlbum.user.name}</a></div>`,
+        });
+      })
+    })
+}
+
+function renderSingleAlbum(data) {
+  // let album = data.album;
+  // let title = data.title;
+  // let createdBy = data.createdBy;
+  
+  let {album, title, createdBy} = data;
+
+  let albumItem = document.createElement('div');
+  albumItem.classList.add('album-item');
+  
+  albumsWrapperTitle.textContent = title;
+
+  let randomIndex = Math.floor(Math.random() * album.photos.length);
+
+  albumItem.innerHTML = `<h3><a href="./album.html?album_id=${album.id}&album_title=${album.title}&user_id=${album.userId}&user_name=${album.user.name}">${album.title}</a> (${album.photos.length})</h3>
+                        ${createdBy}
+                        <img src="${album.photos[randomIndex].thumbnailUrl}">`;
+
+  albumsWrapper.prepend(albumItem);
+}
+
+init();
