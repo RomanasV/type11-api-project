@@ -37,7 +37,7 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
 
       //   })
        
-      let updatedTitle = post.title[0].toUpperCase() + post.title.slice(1);
+      let updatedTitle = firstLetterUpperCase(post.title);
 
       let postItem = document.createElement('div');
       postItem.classList.add('post-item');
@@ -68,15 +68,8 @@ fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
       fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
         .then(res => res.json())
         .then(comments => {
-          comments.map(comment => {
-            let commentItem = document.createElement('div');
-            commentItem.classList.add('comment-item');
-
-            commentItem.innerHTML = `<h3>${comment.name}</h3>
-                                     <span>Comment by: ${comment.email}</span>
-                                     <p>${comment.body}</p>`
-
-            commentsWrapper.prepend(commentItem);              
+          comments.map(singleComment => {
+            renderSingleComment(singleComment, commentsWrapper);
           })
         })
     });
