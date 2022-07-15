@@ -5,7 +5,7 @@ function renderListElement(data) {
     itemElement.classList.add(data.class);
   }
   
-  itemElement.innerHTML = `<a href="${data.href}">${data.content}</a>`;
+  itemElement.innerHTML = `<a href="${data.href}">${firstLetterUpperCase(data.content)}</a>`;
   data.parentElement.append(itemElement);
 }
 

@@ -32,7 +32,7 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
       let postItem = document.createElement('div');
       postItem.classList.add('post-item');
 
-      postItem.innerHTML = `<h4>${post.title}</h4>
+      postItem.innerHTML = `<h4>${firstLetterUpperCase(post.title)}</h4>
                             <p>${post.body}</p>
                             <a href="./post.html?post_id=${post.id}">Read More</a>`;
 
@@ -53,11 +53,11 @@ fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`)
     userAlbums.append(albumsList);
 
     albums.map(album => {
-      let albumItem = document.createElement('li');
-      albumItem.classList.add('album-item');
-
-      albumItem.innerHTML = `<a href="./album.html">${album.title}</a>`;
-
-      albumsList.prepend(albumItem);
+      renderListElement({
+        href: `./album.html?album_id=${album.id}`,
+        content: album.title,
+        parentElement: albumsList,
+        class: 'album-item',
+      });
     })
   })

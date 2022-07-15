@@ -24,10 +24,12 @@ function renderPostsByUserId(id) {
       postsListTitle.textContent = `Posts of ${user.name}:`;
       
       user.posts.map(post => {
-        let postItem = document.createElement('li');
-        postItem.innerHTML = `<a href="./post.html?post_id=${post.id}">${post.title}</a>`;
-
-        postsList.prepend(postItem);
+        renderListElement({
+          content: post.title,
+          href: `./post.html?post_id=${post.id}`,
+          parentElement: postsList,
+          class: 'post-item',
+        });
       })
     })
 }
@@ -38,10 +40,12 @@ function renderAllPosts() {
     .then(posts => {
       postsListTitle.textContent = 'All Posts:';
       posts.map(post => {
-        let postItem = document.createElement('li');
-        postItem.innerHTML = `<a href="./post.html?post_id=${post.id}">${post.title} (${post.user.name})</a>`;
-
-        postsList.prepend(postItem);
+        renderListElement({
+          content: `${post.title} (${post.user.name})`,
+          href: `./post.html?post_id=${post.id}`,
+          parentElement: postsList,
+          class: 'post-item',
+        });
       })
     })
 }
