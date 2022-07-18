@@ -1,3 +1,5 @@
+import { firstLetterUpperCase } from './functions.js';
+
 function init() {
   let queryParams = document.location.search;
   let urlParams = new URLSearchParams(queryParams);

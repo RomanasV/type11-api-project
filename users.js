@@ -1,3 +1,5 @@
+import { renderListElement } from './functions.js';
+
 function usersPageInit() {
 
   fetch('https://jsonplaceholder.typicode.com/users?_embed=posts')

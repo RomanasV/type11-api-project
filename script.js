@@ -1,3 +1,5 @@
+import { firstLetterUpperCase, renderSingleComment } from './functions.js';
+
 let postsWrapper = document.querySelector('#posts-wrapper');
 let albumsWrapper = document.querySelector('#albums-wrapper');
 
