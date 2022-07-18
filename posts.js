@@ -1,4 +1,7 @@
 import { renderListElement } from './functions.js';
+import { headerView } from './headerView.js';
+
+headerView();
 
 let postsWrapper = document.querySelector('#posts-wrapper');
 let postsListTitle = document.createElement('h2');

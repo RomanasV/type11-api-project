@@ -1,4 +1,7 @@
 import { firstLetterUpperCase } from './functions.js';
+import headerView from './headerView.js';
+
+headerView();
 
 let albumsWrapper = document.querySelector('#albums-wrapper');
 let albumsWrapperTitle = document.createElement('h2');

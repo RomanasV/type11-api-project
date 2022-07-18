@@ -1,4 +1,7 @@
 import { firstLetterUpperCase, renderSingleComment } from './functions.js';
+import { headerView } from './headerView.js';
+
+headerView();
 
 let queryParams = document.location.search;
 let urlParams = new URLSearchParams(queryParams);
