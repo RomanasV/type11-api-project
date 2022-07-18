@@ -1,7 +1,6 @@
-import { renderListElement } from './functions.js';
+import { renderListElement } from '../functions.js';
 
 function usersList(users) {
-  console.log(users);
   let usersWrapper = document.querySelector('#users-wrapper');
   let usersList = document.createElement('ul');
 
