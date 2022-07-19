@@ -1,18 +1,27 @@
-import { firstLetterUpperCase } from "./functions.js";
+import { firstLetterUpperCase } from "../functions.js";
 
-export default function albums(albumsData, wrapperSelector) {
+export default function albums(data) {
+  let { albumsData, wrapperSelector, allAlbums } = data;
+
   let albumsWrapper = document.querySelector(wrapperSelector);
   let albumsWrapperTitle = document.createElement('h2');
+  albumsWrapper.before(albumsWrapperTitle);
+
+  if (allAlbums) {
+    albumsWrapperTitle.textContent = `All albums:`;
+  } else {
+    albumsWrapperTitle.textContent = `Albums of ${albumsData[0].user.name}:`;
+  }
 
   albumsData.map(album => {
     let createdBy = '';
 
+    if (allAlbums) {
+      createdBy = `<div>Album created by: <a href="./user.html?user_id=${album.user.id}">${album.user.name}</a></div>`;
+    }
+
     let albumItem = document.createElement('div');
     albumItem.classList.add('album-item');
-    
-    document.body.prepend(albumsWrapperTitle);
-  
-    albumsWrapperTitle.textContent = `Albums of ${album.user.name}:`;
   
     let randomIndex = Math.floor(Math.random() * album.photos.length);
   

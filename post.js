@@ -1,5 +1,5 @@
 import { firstLetterUpperCase, renderSingleComment } from './functions.js';
-import { headerView } from './headerView.js';
+import headerView from './headerView.js';
 
 headerView();
 
