@@ -1,4 +1,4 @@
-import { firstLetterUpperCase } from './functions.js';
+import { firstLetterUpperCase } from '../functions.js';
 
 export default function album(data) {
   let {photos, albumTitle, userId, userName} = data;
