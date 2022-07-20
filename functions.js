@@ -9,6 +9,14 @@ export function renderListElement(data) {
   data.parentElement.append(itemElement);
 }
 
+export function renderOptionElement(data) {
+  let optionElement = document.createElement('option');
+  optionElement.textContent = data.content;
+  optionElement.value = data.value;
+
+  data.parentElement.append(optionElement);
+}
+
 export function renderSingleComment(comment, commentsWrapper) {
   let commentItem = document.createElement('div');
   commentItem.classList.add('comment-item');
