@@ -1,20 +1,23 @@
-export default function createPost(createdPost, formElement) {
+import { getUserById } from "./createPostController.js";
+
+export default async function createPost(createdPost, formElement) {
   let { body, title, id, userId } = createdPost;
-  console.log(createdPost);
 
   let createdPostWrapper = document.createElement('div');
   createdPostWrapper.classList.add('post-wrapper');
 
-  let postTitle = document.createElement('h2');
-  postTitle.innerHTML = `${title} <span>(id: ${id})</span>`;
+  let postTitleElement = document.createElement('h2');
+  postTitleElement.innerHTML = `${title} <span>(id: ${id})</span>`;
 
-  let postAuthor = document.createElement('span');
-  postAuthor.innerHTML = `Post author: <a href="./user.html?user_id=${userId}">${userId}</a>`
+  let postAuthor = await getUserById(userId);
 
-  let postContent = document.createElement('p');
-  postContent.textContent = body;
+  let postAuthorElement = document.createElement('span');
+  postAuthorElement.innerHTML = `Post author: <a href="./user.html?user_id=${userId}">${postAuthor.name}</a>`
 
-  createdPostWrapper.append(postTitle, postAuthor, postContent);
+  let postContentElement = document.createElement('p');
+  postContentElement.textContent = body;
+
+  createdPostWrapper.append(postTitleElement, postAuthorElement, postContentElement);
 
   formElement.after(createdPostWrapper);
 }

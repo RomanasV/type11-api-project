@@ -6,11 +6,11 @@ import createPost from './createPostView.js';
 async function init() {
   headerView();
 
-  let data = await getAllUsers();
+  let users = await getAllUsers();
 
   let selectElement = document.querySelector('#post-author');
 
-  data.map(item => {
+  users.map(item => {
     renderOptionElement({
       content: item.name,
       value: item.id,
