@@ -1,7 +1,7 @@
-import headerView from './headerView.js';
-import { getAllUsers, createNewPost } from '../createPostController.js';
-import { renderOptionElement } from './functions.js';
-import createPost from '../createPostView.js';
+import headerView from '../headerView.js';
+import { getAllUsers, createNewPost } from './createPostController.js';
+import { renderOptionElement } from '../functions.js';
+import createPost from './createPostView.js';
 
 async function init() {
   headerView();
