@@ -1,11 +1,13 @@
 import headerView from '../headerView.js';
+import { createNewUser } from './createUserController.js';
+import createUser from './createUserView.js';
 
 function init() {
   headerView();
 
   let createUserForm = document.querySelector('#create-user-form');
   
-  createUserForm.addEventListener('submit', (event) => {
+  createUserForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     
     // let {name, username, email} = event.target.elements;
@@ -26,7 +28,7 @@ function init() {
     let catchPhrase = elements['company-catchphrase'].value;
     let bs = elements['company-bs'].value;
 
-    let userUserData = {
+    let newUser = {
       name,
       username,
       email,
@@ -45,7 +47,8 @@ function init() {
       }
     }
 
-    console.log(userUserData);
+    let createdUser = await createNewUser(newUser);
+    createUser(createdUser, event.target);
 
     event.target.reset();
   })

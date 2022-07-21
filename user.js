@@ -19,7 +19,7 @@ fetch('https://jsonplaceholder.typicode.com/users/' + userId)
                             <li><strong>Address:</strong> <a href="#">${user.address.street} ${user.address.suite}, ${user.address.city} (zipcode: ${user.address.zipcode})</a></li>
                             <li><strong>Website:</strong> <a href="${user.website}" target="_blank">${user.website}</a></li>
                             <li><strong>Work:</strong> ${user.company.name}</li>
-                          </ul>`
+                          </ul>`;
   })
 
 fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)

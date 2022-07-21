@@ -24,6 +24,10 @@ fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
     let postAuthor = document.createElement('span');
     postAuthor.classList.add('post-author');
 
+    let postEditLink = document.createElement('a');
+    postEditLink.textContent = 'Edit post';
+    postEditLink.href = './edit-post.html?post_id=' + postId;
+
     let postBody = document.createElement('p');
     postBody.classList.add('post-content');
     postBody.textContent = post.body;
@@ -35,7 +39,7 @@ fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
     let commentsWrapper = document.createElement('div');
     commentsWrapper.classList.add('comments-wrapper');
 
-    postItem.append(postTitle, postAuthor, postBody, otherPosts, commentsWrapper);
+    postItem.append(postTitle, postAuthor, postEditLink, postBody, otherPosts, commentsWrapper);
     postWrapper.prepend(postItem);
 
     fetch('https://jsonplaceholder.typicode.com/users/' + post.userId)

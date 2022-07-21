@@ -10,3 +10,7 @@ async function createNewUser(user) {
   let createdUser = await res.json();
   return createdUser;
 }
+
+export {
+  createNewUser,
+}
