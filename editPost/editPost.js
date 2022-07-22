@@ -1,8 +1,12 @@
 import { getAllUsers } from '../createPost/createPostController.js';
 import { editPost } from './editPostController.js';
 import { renderOptionElement } from '../functions.js';
+import createPost from '../createPost/createPostView.js';
+import headerView from '../headerView.js';
 
 async function init() {
+  headerView();
+  
   let queryParams = document.location.search;
   let urlParams = new URLSearchParams(queryParams);
   let postId = urlParams.get('post_id');
@@ -42,8 +46,7 @@ async function init() {
                               userId: Number(author.value),
                            });
 
-
-    console.log(editedPostObject);
+    createPost(editedPostObject, event.target);
   })
 }
 
