@@ -1,4 +1,5 @@
 import { getAllUsers } from '../createPost/createPostController.js';
+import { editPost } from './editPostController.js';
 import { renderOptionElement } from '../functions.js';
 
 async function init() {
@@ -28,6 +29,22 @@ async function init() {
   postTitle.value = post.title;
   postContent.value = post.body;
   postAuthor.value = post.userId;
+
+  editPostForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    let {title, content, author} = event.target.elements;
+
+    let editedPostObject = await editPost({
+                              id: Number(postId),
+                              title: title.value,
+                              body: content.value,
+                              userId: Number(author.value),
+                           });
+
+
+    console.log(editedPostObject);
+  })
 }
 
 init();
