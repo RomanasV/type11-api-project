@@ -7,7 +7,29 @@
   <title>Edit Post</title>
 </head>
 <body>
-  
-  <script src="./editPost/editPost.js"></script>
+  <form id="edit-post-form">
+    <div class="form-control">
+      <label for="post-title">Post title:</label>
+      <input type="text" name="title" id="post-title">
+    </div>
+
+    <div class="form-control">
+      <label for="post-content">Post content:</label>
+      <textarea name="content" id="post-content" cols="50" rows="10"></textarea>
+    </div>
+
+    <div class="form-control">
+      <label for="post-author">Post author:</label>
+      <select name="author" id="post-author">
+        <!-- <option value="1">Pirmas vardas</option>
+        <option value="2">Antras vardas</option>
+        <option value="3">Trecias vardas</option> -->
+      </select>
+    </div>
+
+    <input type="submit" value="Edit post">
+  </form>
+
+  <script type="module" src="./editPost/editPost.js"></script>
 </body>
 </html>
