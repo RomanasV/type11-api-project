@@ -71,17 +71,37 @@ fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
             postId: Number(postId),
           }
 
-          let res = await fetch('https://jsonplaceholder.typicode.com/comments', {
-            method: 'POST',
-            body: JSON.stringify(newComment),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-            },
-          });
+          let editCommentId = event.target.dataset.editCommentId;
 
-          let responseComment = await res.json();
-          console.log(responseComment);
-          renderSingleComment(responseComment, commentsWrapper);
+          if (!editCommentId) {
+            let res = await fetch('https://jsonplaceholder.typicode.com/comments', {
+              method: 'POST',
+              body: JSON.stringify(newComment),
+              headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
+            });
+
+            let responseComment = await res.json();
+            console.log(responseComment);
+            renderSingleComment(responseComment, commentsWrapper);
+          } else {
+            let res = await fetch('https://jsonplaceholder.typicode.com/comments/' + editCommentId, {
+              method: 'PATCH',
+              body: JSON.stringify(newComment),
+              headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
+            });
+
+            let responseComment = await res.json();
+            console.log(responseComment);
+            renderSingleComment(responseComment, commentsWrapper);
+          }
+
+          commentsForm.reset();
+          commentsForm.elements['edit-button'].value = 'Add a comment';
+          delete event.target.dataset.editCommentId;
         })
       })
   })
