@@ -54,5 +54,34 @@ fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
         comments.map(singleComment => {
           renderSingleComment(singleComment, commentsWrapper);
         })
+
+        let commentsForm = document.querySelector('#comments-form');
+
+        commentsForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          let name = event.target.elements.name.value;
+          let email = event.target.elements.email.value;
+          let body = event.target.elements.body.value;
+
+          let newComment = {
+            name,
+            email,
+            body,
+            postId: Number(postId),
+          }
+
+          let res = await fetch('https://jsonplaceholder.typicode.com/comments', {
+            method: 'POST',
+            body: JSON.stringify(newComment),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          });
+
+          let responseComment = await res.json();
+          console.log(responseComment);
+          renderSingleComment(responseComment, commentsWrapper);
+        })
       })
   })

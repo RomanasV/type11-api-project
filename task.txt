@@ -117,3 +117,38 @@ KOMENTARAI:
 14.2.2. Paspaudus šį mygtuką, komentaro formą (14.1.1. užduotis) užpildyti komentaro turiniu.
 14.2.3. Redaguotą komentarą nusiųsti į API (PUT metodas).
 14.2.4. Iš API gauto rezultato turiniu pakeisti redaguotą komentarą.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

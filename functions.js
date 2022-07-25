@@ -25,6 +25,14 @@ export function renderSingleComment(comment, commentsWrapper) {
                            <span>Comment by: ${comment.email}</span>
                            <p>${comment.body}</p>`;
 
+  let editButton = document.createElement('button');
+  editButton.textContent = 'Edit';
+  editButton.addEventListener('click', () => {
+    console.log(editButton);
+  })
+
+  commentItem.append(editButton);
+
   commentsWrapper.prepend(commentItem);
 }
 
