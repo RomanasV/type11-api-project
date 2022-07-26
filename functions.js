@@ -17,9 +17,18 @@ export function renderOptionElement(data) {
   data.parentElement.append(optionElement);
 }
 
-export function renderSingleComment(comment, commentsWrapper) {
-  let commentItem = document.createElement('div');
-  commentItem.classList.add('comment-item');
+export function renderSingleComment(comment, commentsWrapper, editCommentId) {
+  let commentItem;
+
+  if (!editCommentId) {
+    commentItem = document.createElement('div');
+    commentItem.classList.add('comment-item');
+    commentItem.dataset.commentId = comment.id;
+
+    commentsWrapper.prepend(commentItem);
+  } else {
+    commentItem = document.querySelector(`[data-comment-id="${comment.id}"]`);
+  }
 
   commentItem.innerHTML = `<h5 class="comment-title">${firstLetterUpperCase(comment.name)}</h5>
                            <span>Comment by: <span class="comment-email">${comment.email}</span></span>
@@ -44,12 +53,9 @@ export function renderSingleComment(comment, commentsWrapper) {
     commentForm.elements['edit-button'].value = 'Edit a comment';
 
     commentForm.dataset.editCommentId = comment.id;
-
   })
 
   commentItem.append(editButton);
-
-  commentsWrapper.prepend(commentItem);
 }
 
 export function firstLetterUpperCase(str) {

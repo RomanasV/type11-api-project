@@ -96,7 +96,7 @@ fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
 
             let responseComment = await res.json();
             console.log(responseComment);
-            renderSingleComment(responseComment, commentsWrapper);
+            renderSingleComment(responseComment, commentsWrapper, editCommentId);
           }
 
           commentsForm.reset();
