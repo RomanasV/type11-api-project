@@ -118,41 +118,6 @@ KOMENTARAI:
 14.2.3. Redaguotą komentarą nusiųsti į API (PUT metodas).
 14.2.4. Iš API gauto rezultato turiniu pakeisti redaguotą komentarą.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 PAGINATION:
 15.1. Puslapiuose, kuriuose atvaizuojami post'ai, atvaizduoti pirmus 25 post'us. Tai bus pirmas post'ų puslapis.
 15.2.1. Post'ų sąrašo apačioje pridėti nuorodas, kurios leidžia perjungti kitą post'ų puslapį. Pvz. antras puslapis rodys post'us nuo 26 iki 50, trečias puslapis rodys nuo 51 iki 75 ir t.t.
@@ -167,4 +132,3 @@ PAGINATION:
 15.4.2. Jeigu esama trečiame puslapyje, tai previous puslapis turi būti antras, o next puslapis turi būti ketvirtas.
 15.4.3. Jeigu šiuo metu esama pirmame puslapyje, tai previous nuorodos paspausti negalima.
 15.4.4. Jeigu šiuo metu esama paskutiniame puslapyje, tai next nuorodos paspausti negalima.
-
