@@ -22,13 +22,19 @@ function init () {
 }
 
 function renderPostsByUserId(id) {
+  let urlParams = document.location.search;
+  let searchParams = new URLSearchParams(urlParams);
+  let limit = searchParams.get('limit') ? searchParams.get('limit') : 5;
+  let page = searchParams.get('page') ? searchParams.get('page') : 1;
 
-  fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts`)
+  fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts?_limit=5&_page=1&_expand=user`)
     .then(res => res.json())
-    .then(user => {
-      postsListTitle.textContent = `Posts of ${user.name}:`;
+    .then(posts => {
+      postsListTitle.textContent = `Posts of ${posts[0].user.name}:`;
       
-      user.posts.map(post => {
+      renderPaginationLinks({limit, page});
+
+      posts.map(post => {
         renderListElement({
           content: post.title,
           href: `./post.html?post_id=${post.id}`,
@@ -63,10 +69,14 @@ function renderAllPosts() {
 }
 
 function renderPaginationLinks(data) {
-  let total = 100;
+  let total = 10;
   let currentPage = Number(data.page);
   let limit = data.limit;
   let pages = Math.ceil(total / limit);
+
+  if (pages === 1) {
+    return;
+  }
 
   let paginationWrapper = document.createElement('div');
   paginationWrapper.classList.add('pagination-wrapper');
@@ -76,7 +86,11 @@ function renderPaginationLinks(data) {
     firstPaginationPageItem.href = `./posts.html?page=1&limit=${limit}`;
     firstPaginationPageItem.textContent = 'First';
     
-    paginationWrapper.append(firstPaginationPageItem);
+    let prevPaginationPageItem = document.createElement('a');
+    prevPaginationPageItem.href = `./posts.html?page=${currentPage - 1}&limit=${limit}`
+    prevPaginationPageItem.textContent = 'Prev';
+  
+    paginationWrapper.append(firstPaginationPageItem, prevPaginationPageItem);
   }
 
   for (let i = 1; i <= pages; i++) {
@@ -99,8 +113,12 @@ function renderPaginationLinks(data) {
     let lastPaginationPageItem = document.createElement('a');
     lastPaginationPageItem.href = `./posts.html?page=${pages}&limit=${limit}`;
     lastPaginationPageItem.textContent = 'Last';
-    
-    paginationWrapper.append(lastPaginationPageItem);
+
+    let nextPaginationPageItem = document.createElement('a');
+    nextPaginationPageItem.href = `./posts.html?page=${currentPage + 1}&limit=${limit}`;
+    nextPaginationPageItem.textContent = 'Next';
+
+    paginationWrapper.append(nextPaginationPageItem, lastPaginationPageItem);
   }
 
   postsWrapper.append(paginationWrapper);

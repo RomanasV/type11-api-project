@@ -133,24 +133,6 @@ PAGINATION:
 15.4.3. Jeigu šiuo metu esama pirmame puslapyje, tai previous nuorodos paspausti negalima.
 15.4.4. Jeigu šiuo metu esama paskutiniame puslapyje, tai next nuorodos paspausti negalima.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 15. Panaudoti pagination kituose puslapiuose, kuriuose yra sąrašas duomenų.
 
 16. Sukurti select elementą, kuriame būtų galimybė pasirinkti po kiek postų (arba kitų duomenų) yra atvaizduojama viename puslapyje.
