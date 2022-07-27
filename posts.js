@@ -48,7 +48,7 @@ function renderAllPosts() {
   fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&_page=${page}&_limit=${limit}`)
     .then(res => res.json())
     .then(posts => {
-      renderPaginationLinks(limit);
+      renderPaginationLinks({limit, page});
 
       postsListTitle.textContent = 'All Posts:';
       posts.map(post => {
@@ -62,19 +62,45 @@ function renderAllPosts() {
     })
 }
 
-function renderPaginationLinks(pageLimit) {
+function renderPaginationLinks(data) {
   let total = 100;
-  let limit = pageLimit;
+  let currentPage = Number(data.page);
+  let limit = data.limit;
   let pages = Math.ceil(total / limit);
 
   let paginationWrapper = document.createElement('div');
   paginationWrapper.classList.add('pagination-wrapper');
 
+  if (currentPage !== 1) {
+    let firstPaginationPageItem = document.createElement('a');
+    firstPaginationPageItem.href = `./posts.html?page=1&limit=${limit}`;
+    firstPaginationPageItem.textContent = 'First';
+    
+    paginationWrapper.append(firstPaginationPageItem);
+  }
+
   for (let i = 1; i <= pages; i++) {
-    let paginationLink = document.createElement('a');
-    paginationLink.href = `./posts.html?page=${i}&limit=${limit}`;
-    paginationLink.textContent = i;
-    paginationWrapper.append(paginationLink);
+    let paginationListItem;
+
+    if (i === currentPage) {
+      paginationListItem = document.createElement('span');
+      paginationListItem.classList.add('current-page');
+    } else {
+      paginationListItem = document.createElement('a');
+      paginationListItem.href = `./posts.html?page=${i}&limit=${limit}`;
+    }
+
+    paginationListItem.classList.add('pagination-item');
+    paginationListItem.textContent = i;
+    paginationWrapper.append(paginationListItem);
+  }
+
+  if (currentPage !== pages) {
+    let lastPaginationPageItem = document.createElement('a');
+    lastPaginationPageItem.href = `./posts.html?page=${pages}&limit=${limit}`;
+    lastPaginationPageItem.textContent = 'Last';
+    
+    paginationWrapper.append(lastPaginationPageItem);
   }
 
   postsWrapper.append(paginationWrapper);
