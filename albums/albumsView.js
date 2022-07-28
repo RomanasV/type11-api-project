@@ -1,7 +1,8 @@
-import { firstLetterUpperCase } from "../functions.js";
+import { firstLetterUpperCase } from '../functions.js';
+import renderPaginationLinks from '../pagination.js'
 
 export default function albums(data) {
-  let { albumsData, wrapperSelector, allAlbums } = data;
+  let { albumsData, wrapperSelector, allAlbums, total, page, limit } = data;
 
   let albumsWrapper = document.querySelector(wrapperSelector);
   let albumsWrapperTitle = document.createElement('h2');
@@ -31,4 +32,12 @@ export default function albums(data) {
     
     albumsWrapper.prepend(albumItem);
   })
+
+  renderPaginationLinks({
+    total,
+    page,
+    parentElement: albumsWrapper,
+    limit,
+    // param,
+  });
 }

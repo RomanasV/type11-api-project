@@ -8,6 +8,8 @@ async function init() {
   let queryParams = document.location.search;
   let urlParams = new URLSearchParams(queryParams);
   let userId = urlParams.get('user_id');
+  let page = urlParams.get('page') ? urlParams.get('page') : 1;
+  let limit = urlParams.get('limit') ? urlParams.get('limit') : 25;
 
   if (userId) {
     // let albumsData = await getAllExpandedAlbumsByUserId(userId);
@@ -18,12 +20,15 @@ async function init() {
     });
     return;
   }
-  
-  // let albumsData = await getAllExpandedAlbums(15);
+
+  let albumsData = await getAllExpandedAlbums(limit);
   albums({
-    albumsData: await getAllExpandedAlbums(15),
+    albumsData: albumsData.albums,
     wrapperSelector: '#albums-wrapper',
     allAlbums: true,
+    total: albumsData.total,
+    page,
+    limit
   });
 }
 

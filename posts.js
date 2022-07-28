@@ -1,5 +1,6 @@
 import { renderListElement } from './functions.js';
 import headerView from './headerView.js';
+import renderPaginationLinks from './pagination.js'; 
 
 headerView();
 
@@ -36,7 +37,13 @@ function renderPostsByUserId(id) {
     .then(posts => {
       postsListTitle.textContent = `Posts of ${posts[0].user.name}:`;
       
-      renderPaginationLinks({limit, page, total});
+      renderPaginationLinks({
+        limit, 
+        page, 
+        total, 
+        param: `user_id=${id}`,
+        parentElement: postsWrapper,
+      });
 
       posts.map(post => {
         renderListElement({
@@ -62,7 +69,12 @@ function renderAllPosts() {
       return res.json();
     })
     .then(posts => {
-      renderPaginationLinks({limit, page, total});
+      renderPaginationLinks({
+        limit,
+        page,
+        total,
+        parentElement: postsWrapper,
+      });
 
       postsListTitle.textContent = 'All Posts:';
       posts.map(post => {
@@ -76,60 +88,27 @@ function renderAllPosts() {
     })
 }
 
-function renderPaginationLinks(data) {
-  let total = Number(data.total);
-  let currentPage = Number(data.page);
-  let limit = data.limit;
-  let pages = Math.ceil(total / limit);
 
-  if (pages === 1) {
-    return;
-  }
-
-  let paginationWrapper = document.createElement('div');
-  paginationWrapper.classList.add('pagination-wrapper');
-
-  if (currentPage !== 1) {
-    let firstPaginationPageItem = document.createElement('a');
-    firstPaginationPageItem.href = `./posts.html?page=1&limit=${limit}`;
-    firstPaginationPageItem.textContent = 'First';
-    
-    let prevPaginationPageItem = document.createElement('a');
-    prevPaginationPageItem.href = `./posts.html?page=${currentPage - 1}&limit=${limit}`
-    prevPaginationPageItem.textContent = 'Prev';
-  
-    paginationWrapper.append(firstPaginationPageItem, prevPaginationPageItem);
-  }
-
-  for (let i = 1; i <= pages; i++) {
-    let paginationListItem;
-
-    if (i === currentPage) {
-      paginationListItem = document.createElement('span');
-      paginationListItem.classList.add('current-page');
-    } else {
-      paginationListItem = document.createElement('a');
-      paginationListItem.href = `./posts.html?page=${i}&limit=${limit}`;
-    }
-
-    paginationListItem.classList.add('pagination-item');
-    paginationListItem.textContent = i;
-    paginationWrapper.append(paginationListItem);
-  }
-
-  if (currentPage !== pages) {
-    let lastPaginationPageItem = document.createElement('a');
-    lastPaginationPageItem.href = `./posts.html?page=${pages}&limit=${limit}`;
-    lastPaginationPageItem.textContent = 'Last';
-
-    let nextPaginationPageItem = document.createElement('a');
-    nextPaginationPageItem.href = `./posts.html?page=${currentPage + 1}&limit=${limit}`;
-    nextPaginationPageItem.textContent = 'Next';
-
-    paginationWrapper.append(nextPaginationPageItem, lastPaginationPageItem);
-  }
-
-  postsWrapper.append(paginationWrapper);
-}
 
 init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
