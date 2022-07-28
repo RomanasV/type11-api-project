@@ -2,7 +2,7 @@ import { firstLetterUpperCase } from '../functions.js';
 import renderPaginationLinks from '../pagination.js'
 
 export default function albums(data) {
-  let { albumsData, wrapperSelector, allAlbums, total, page, limit } = data;
+  let { albumsData, wrapperSelector, allAlbums, total, page, limit, userId } = data;
 
   let albumsWrapper = document.querySelector(wrapperSelector);
   let albumsWrapperTitle = document.createElement('h2');
@@ -33,11 +33,17 @@ export default function albums(data) {
     albumsWrapper.prepend(albumItem);
   })
 
+  let userParam = '';
+
+  if (userId) {
+    userParam = `user_id=${userId}`;
+  }
+
   renderPaginationLinks({
     total,
     page,
     parentElement: albumsWrapper,
     limit,
-    // param,
+    param: userParam,
   });
 }

@@ -9,14 +9,18 @@ async function init() {
   let urlParams = new URLSearchParams(queryParams);
   let userId = urlParams.get('user_id');
   let page = urlParams.get('page') ? urlParams.get('page') : 1;
-  let limit = urlParams.get('limit') ? urlParams.get('limit') : 25;
+  let limit = urlParams.get('limit') ? urlParams.get('limit') : 20;
 
   if (userId) {
-    // let albumsData = await getAllExpandedAlbumsByUserId(userId);
+    let albumsData = await getAllExpandedAlbumsByUserId(userId, page, limit);
     albums({
-      albumsData: await getAllExpandedAlbumsByUserId(userId),
+      albumsData: albumsData.albums,
       wrapperSelector: '#albums-wrapper',
       allAlbums: false,
+      page,
+      limit,
+      total: albumsData.total,
+      userId
     });
     return;
   }

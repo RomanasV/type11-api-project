@@ -111,3 +111,14 @@ init();
 
 
 
+
+// document.querySelector('select').addEventListener('change', (event) => {
+//   console.log(event.target.value);
+//   let search = document.location.search;
+//   let params = new URLSearchParams(search);
+//   params.set('limit', event.target.value);
+// console.log(params.toString());
+
+// console.log(document.location);
+//   window.location.href = './posts.html?' + params.toString();
+// })
