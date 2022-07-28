@@ -26,13 +26,17 @@ function renderPostsByUserId(id) {
   let searchParams = new URLSearchParams(urlParams);
   let limit = searchParams.get('limit') ? searchParams.get('limit') : 5;
   let page = searchParams.get('page') ? searchParams.get('page') : 1;
+  let total;
 
   fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts?_limit=5&_page=1&_expand=user`)
-    .then(res => res.json())
+    .then(res => {
+      total = res.headers.get('x-total-count');
+      return res.json();
+    })
     .then(posts => {
       postsListTitle.textContent = `Posts of ${posts[0].user.name}:`;
       
-      renderPaginationLinks({limit, page});
+      renderPaginationLinks({limit, page, total});
 
       posts.map(post => {
         renderListElement({
@@ -50,11 +54,15 @@ function renderAllPosts() {
   let searchParams = new URLSearchParams(urlParams);
   let limit = searchParams.get('limit') ? searchParams.get('limit') : 25;
   let page = searchParams.get('page') ? searchParams.get('page') : 1;
+  let total;
 
   fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&_page=${page}&_limit=${limit}`)
-    .then(res => res.json())
+    .then(res => {
+      total = res.headers.get('x-total-count');
+      return res.json();
+    })
     .then(posts => {
-      renderPaginationLinks({limit, page});
+      renderPaginationLinks({limit, page, total});
 
       postsListTitle.textContent = 'All Posts:';
       posts.map(post => {
@@ -69,7 +77,7 @@ function renderAllPosts() {
 }
 
 function renderPaginationLinks(data) {
-  let total = 10;
+  let total = Number(data.total);
   let currentPage = Number(data.page);
   let limit = data.limit;
   let pages = Math.ceil(total / limit);
