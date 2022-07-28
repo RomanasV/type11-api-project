@@ -4,8 +4,8 @@ async function getAllExpandedAlbumsByUserId(id) {
   return albums;
 }
 
-async function getAllExpandedAlbums(limit) {
-  let res = await fetch('https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=' + limit);
+async function getAllExpandedAlbums(limit, page) {
+  let res = await fetch(`https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_page=${page}&_limit=${limit}`);
   let albums = await res.json();
   let total = res.headers.get('X-Total-Count');
   let data = {albums, total};

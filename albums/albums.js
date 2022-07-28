@@ -21,7 +21,7 @@ async function init() {
     return;
   }
 
-  let albumsData = await getAllExpandedAlbums(limit);
+  let albumsData = await getAllExpandedAlbums(limit, page);
   albums({
     albumsData: albumsData.albums,
     wrapperSelector: '#albums-wrapper',

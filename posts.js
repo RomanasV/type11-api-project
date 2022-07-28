@@ -29,7 +29,7 @@ function renderPostsByUserId(id) {
   let page = searchParams.get('page') ? searchParams.get('page') : 1;
   let total;
 
-  fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts?_limit=5&_page=1&_expand=user`)
+  fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts?_limit=${limit}&_page=${page}&_expand=user`)
     .then(res => {
       total = res.headers.get('x-total-count');
       return res.json();
@@ -91,7 +91,6 @@ function renderAllPosts() {
 
 
 init();
-
 
 
 
